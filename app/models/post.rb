@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
     
     has_many :users ,through: :likes
     
+    has_many :comments, dependent: :destroy
+    
     include SimpleRecommender::Recommendable
     similar_by :users
 end

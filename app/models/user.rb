@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :posts, through: :likes
   
+  has_many :comments, dependent: :destroy
+  
   def like!(post)
     self.likes.create!(post_id: post.id)
   end

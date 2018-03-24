@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   
   resources :posts do
+    resources :comments
     member do
+      
       get 'like', :to => 'posts#like'
       delete 'unlike', :to => 'posts#unlike'
     end
