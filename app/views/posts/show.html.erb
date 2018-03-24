@@ -7,5 +7,11 @@
   <%= div_for @post do %>
      <%= render partial: "button", locals: { post: @post } %>
   <% end %>
+  
+<div>
+  <!--add recommendation-->
+</div>  
+  
+  
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
