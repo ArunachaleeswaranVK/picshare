@@ -1,0 +1,15 @@
+<% if @user == current_user %>
+  <%= link_to 'Edit Profile', edit_user_registration_path %>
+<% end %>
+
+<div>
+    <p><%= @user.user_name %></p>
+    <p><%= @user.bio %></p>
+</div>
+
+<p><%= pluralize @posts.count, 'post' %></p>
+
+<% @posts.each do |post| %>
+    <%= post.title %>
+<% end %>
+

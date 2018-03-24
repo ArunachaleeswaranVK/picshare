@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+    else
+      @posts = Post.all
+    end  
   end
 
   # GET /posts/1
@@ -25,16 +30,30 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+   
+    obj = S3_BUCKET.objects[params[:file].original_filename]
+    
+    # Upload the file
+    obj.write(
+      file: params[:file],
+      acl: :public_read
+    )
+    
+    # Create an object for the upload
+    @post = Post.new(
+			url: obj.public_url,
+			image_name: obj.key,
+			title: params[:title],
+			user_id: current_user.id,
+			tag_list: params[:tag_list]
+		)
+    
+    # Save the upload
+    if @post.save
+      redirect_to posts_path, success: 'File successfully uploaded'
+    else
+      flash.now[:notice] = 'There was an error'
+      render :new
     end
   end
 
@@ -87,6 +106,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title)
+      params.require(:post).permit(:title,:tag_list)
     end
 end

@@ -1,13 +1,28 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
+<div class="row">
+	<div class="col-md-6">	
+		
+		<%= image_tag @post.url,  :size => '260x180' %>
+		<p><%= link_to @post.image_name, @post.url %></p>
+	</div>
+		
+</div>
+<div>
+  <%= link_to current_user.user_name , profile_path(current_user) %>
+</div>
+<div>
   <%= div_for @post do %>
      <%= render partial: "button", locals: { post: @post } %>
   <% end %>
-  
+</div> 
+
 <div>
   <!--add recommendation-->
 </div>  

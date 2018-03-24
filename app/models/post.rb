@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
     
     has_many :comments, dependent: :destroy
     
+    acts_as_taggable
+    
     include SimpleRecommender::Recommendable
     similar_by :users
 end

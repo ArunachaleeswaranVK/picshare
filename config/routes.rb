@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
+
   devise_for :users
   
   
@@ -11,7 +13,9 @@ Rails.application.routes.draw do
     end
   end  
 
-   root 'posts#index'
-
- 
+  root 'posts#index'
+  
+  get 'tags/:tag' , to: 'posts#index' , as: :tag
+  get ':id', to: 'profiles#show', as: :profile
+  
 end
