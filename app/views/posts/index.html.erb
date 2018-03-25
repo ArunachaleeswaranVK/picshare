@@ -1,23 +1,27 @@
 
-
 <div class="container">
 <div class="row">
-<% @posts.each do |post| %>
-
-  <div class="col-md-4">
-    <div class="thumbex">
-    <div class="thumbnail"><a href="#">
-      <img src="https://3.bp.blogspot.com/-XVkR_Ha9S3E/VVwRk-hG1RI/AAAAAAAAAFA/EgFIqLpHknQ/s1600/Free%2BDownload%2BHd%2BWallpaper%2BRainforest%2Bfor%2Biphone2.jpg"/><span>
-      <%= post.title%></span></a>
+  <% @posts.each do |post| %>
+      <div class="col-md-4">
+        <div class="column"> 
+          
+          <!-- Post-->
+          <div class="post-module"> 
+            <!-- Thumbnail-->
+            <div class="thumbnail">
+              
+              <img src="<%= post.url %>" class="img-responsive" alt=""> </div>
+            <!-- Post Content-->
+            <div class="post-content">
+              <div class="category"><%= post_user(post) %></div>
+              <h3 class="title"><%= link_to post.title , post %></h3>
+             
+              <p class="description">Tags: #<%= raw post.tag_list.map { |t| link_to t , tag_path(t) }.join(',#') %></p>
+              <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-">o</i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <%= raw post.tag_list.map { |t| link_to t , tag_path(t) }.join(',') %>
-    </div>
-  </div>
-  
-
-
-<% end %>
-</div>
+    <% end %>  
+</div>      	
 </div>

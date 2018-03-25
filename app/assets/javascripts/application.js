@@ -15,3 +15,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(window).load(function() {
+  $('.post-module').hover(function() {
+    $(this).find('.description').stop().animate({
+      height: "toggle",
+      opacity: "toggle"
+    }, 300);
+  });
+});

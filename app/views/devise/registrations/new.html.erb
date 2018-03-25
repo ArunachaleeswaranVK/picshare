@@ -1,45 +1,58 @@
-<div class="container" >
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<h2>Sign up</h2>
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
 
+<center id="login-name">Sign up</center>
+	
+<div class="row">
+		
+<div class="col-md-6 col-md-offset-3" id="login">  
+
+<form>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   
-  <div class="field">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :user_name , class: "user" %><br />
+    <%= f.text_field :user_name, autofocus: true , id: "text1" , class: "form-control" %>
   </div>
   
-  <div class="field">
-    <%= f.label :bio %><br />
-    <%= f.text_area :bio %>
+  <div class="form-group">
+    <%= f.label :bio , class: "user"  %><br />
+    <%= f.text_area :bio , id: "text2", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+  <div class="form-group">
+    <%= f.label :email  , class: "user" %><br />
+    <%= f.email_field :email , id: "text2" , class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="form-group">
+    <%= f.label :password  , class: "user" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off"   , id: "text2", class: "form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation , class: "user" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" , id: "text2", class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="form-group">
+    <%= f.submit "Sign up" , class: "btn btn-success btn-block" %>
   </div>
 <% end %>
+	
 
-<%= render "devise/shared/links" %>
-</div>  
+    <br/><br/><br/>
+ 
+    <%= link_to "Login" ,  new_user_session_path  , class: "singup-link"%>
+  
+</form>
+</div>
 </div>
 </div>

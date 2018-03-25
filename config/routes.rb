@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
+  
   get 'profiles/show'
 
   devise_for :users
+  
+  authenticated :user do
+    root to: "posts#index", as: :authenticated_root
+  end
+  
+  unauthenticated do
+    devise_scope :user do
+      root to: "devise/sessions#new"
+    end
+  end
   
   
   resources :posts do
@@ -13,7 +24,7 @@ Rails.application.routes.draw do
     end
   end  
 
-  root 'posts#index'
+  
   
   get 'tags/:tag' , to: 'posts#index' , as: :tag
   get ':id', to: 'profiles#show', as: :profile
