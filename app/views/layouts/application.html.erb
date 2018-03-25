@@ -2,25 +2,26 @@
 <html>
 <head>
   <title>Picshare</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  
   <%= stylesheet_link_tag "welcome" unless user_signed_in? %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= google_webfonts_init({
+    google: ['Roboto Slab', 'Roboto' ,'Josefin Sans','Lato']
+  }) %>
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 
 
-<% if user_signed_in? %>
-
-   <%= render 'layouts/navbar' %>
-<% end %>
 
 
 <%= render 'layouts/messages' %>
-<div class="container">
+
   <%= yield %>
-</div>
+
 
 
 </body>

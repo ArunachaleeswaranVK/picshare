@@ -1,15 +1,44 @@
-<% if @user == current_user %>
-  <%= link_to 'Edit Profile', edit_user_registration_path %>
-<% end %>
+<%= render 'layouts/navbar1' %>
+<br></br>
+<div class="container">
 
-<div>
-    <p><%= @user.user_name %></p>
-    <p><%= @user.bio %></p>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+               
+            </div>
+            <div class="col-md-4">
+                 <h3 class="profile-stat"><%= @user.user_name %></h3>
+                 <h3 class="profile-stat"><%= @user.bio %></h3>
+                 <% if current_user == @user %>
+                 <h3 class="profile-stat"><%= link_to "Edit Profile" , edit_user_registration_path(current_user) %></h3>
+                <% end %> 
+               
+            </div>
+            <div class="col-md-4">
+               
+            </div>
+            
+        </div>
+    </div>
+</div>
+    
+
+
+
+    
+<h2 class="profile-stat-1">Shared Pictures</h2>
+<div class="slider">
+<% @posts.each do |post| %>    
+  <figure class="slider__item"><img class="slider__image" src="<%= post.url %>"/>
+    <figcaption class="slider__caption"><%= post.title %></figcaption>
+  </figure>
+<% end %> 
+<div class="slider__btn"></div>
 </div>
 
-<p><%= pluralize @posts.count, 'post' %></p>
 
-<% @posts.each do |post| %>
-    <%= post.title %>
-<% end %>
 
+
+</div>

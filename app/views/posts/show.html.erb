@@ -1,48 +1,181 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/navbar1' %>
+<br></br>
+<div class="container">
+        <div id="main_area">
+                <!-- Slider -->
+                <div class="row post-show">
+                    <div class="col-xs-6 center-block" id="slider">
+                        <!-- Top part of the slider -->
+                        <div class="row ">
+                          
+                                      
+                               
+                            <div class="col-sm-12 caros" id="carousel-bounding-box">
+                                <div class="carousel slide" id="myCarousel">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                      
+                                        <div class="active item" data-slide-number="0">
+                                        <img src="<%= @post.url %>"></div>
+                                        <% if @post.similar_items.first %>
+                                        <div class="item" data-slide-number="1">
+                                        <img src="<%= @post.similar_items.first.url %>" class="img-responsive" ></div>
+                                        <% end %>
+                                        <% if @post.similar_items.second %>
+                                        <div class="item" data-slide-number="2">
+                                        <img src="<%= @post.similar_items.second.url %>" class="img-responsive"></div>
+                                        <% end %>
+                                        <% if @post.similar_items.third %>
+                                        <div class="item" data-slide-number="3">
+                                        <img src="<%= @post.similar_items.third.url %>" class="img-responsive" ></div>
+                                        <% end %>
+                    
+                                    </div><!-- Carousel nav -->
+                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>                                       
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>                                       
+                                    </a>                                
+                                    </div>
+                            </div>
+                            
+                            
+                            <div class="col-sm-12" id="carousel-text"></div>
 
+                            <div id="slide-content" style="display: none;">
+                                <div id="slide-content-0">
+                                    
+                                  <div class="post-show-card">
+                                    <%= @post.title %> by <%= link_to post_user(@post).user_name , profile_path(post_user(@post)) %>
+                                   </div>
+                                  <%= div_for(@post, class: "post-show-card") do %>
+                                      <%= render partial: "button", locals: { post: @post } %>
+                                  <% end %>
+                                   
+                                   <% if current_user == post_user(@post) %>
+                                          <%= link_to edit_post_path(@post) do %>
+                                              <i class="glyphicon glyphicon-pencil"><strong>Edit</strong></i>
+                                          <% end %> |
+                                      
+                                          <%= link_to post_path(@post), method: :delete , data: {confirm: "Are you sure , Cherry ?"} do %>
+                                              <i class="glyphicon glyphicon-trash"><strong>Delete</strong></i>
+                                          <% end %> 
+                                     
+                                      <% end %> 
+                                  
+                                    
+                                </div>
+                                <% if @post.similar_items.first %>
+                                <div id="slide-content-1">
+                                   <div class="post-show-card">
+                                    <%= @post.similar_items.first.title %> by <%= link_to post_user(@post.similar_items.first).user_name , profile_path(post_user(@post.similar_items.first)) %>
+                                   </div>
+                                  
+                                </div>
+                                <% end %>
+                                <% if @post.similar_items.second %>
+                                <div id="slide-content-2">
+                                    <div class="post-show-card">
+                                    <%= @post.similar_items.second.title %> by <%= link_to post_user(@post.similar_items.second).user_name , profile_path(post_user(@post.similar_items.second)) %>
+                                   </div>
+                                </div>
+                                <% end %>
+                                <% if @post.similar_items.third %>
+                                <div id="slide-content-3">
+                                    <div class="post-show-card">
+                                    <%= @post.similar_items.third.title %> by <%= link_to post_user(@post.similar_items.third).user_name , profile_path(post_user(@post.similar_items.third)) %>
+                                   </div>
+                                </div>
+                                <% end %>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/Slider-->
+                <hr>
+                
+            <!--recommendations-->
+            
+                            <div class="row" id="slider-thumbs">
+                        <!-- Bottom switcher of slider -->
+                     <div class="col-md-12">
+                        <ul class="hide-bullets">
+                        <% if @post.similar_items.present? %>
+                         <p class="rec-title">People also like - </p>
+                            <li class="col-sm-2 first-bullet">
+                                <a class="thumbnail" id="carousel-selector-0"><img src="<%= @post.url %>" class="img-responsive"></a>
+                            </li>
+                            
+                            <% if @post.similar_items.first %>
+                            <li class="col-sm-2">
+                                <a class="thumbnail" id="carousel-selector-1"><img src="<%= @post.similar_items.first.url %>" class="img-responsive"></a>
+                            </li>
+                            <% end %>
+                            <% if @post.similar_items.second %>
+                            <li class="col-sm-2">
+                                <a class="thumbnail" id="carousel-selector-2"><img src="<%= @post.similar_items.second.url %>" class="img-responsive"></a>
+                            </li>
+                            <% end %>  
+                            <% if @post.similar_items.third %>
+                            <li class="col-sm-2">
+                                <a class="thumbnail" id="carousel-selector-3"><img src="<%= @post.similar_items.third.url %>" class="img-responsive"></a>
+                            </li>
+                            <% end %>
+                          <% else %>
+                            <div>
+                              <h3>No similar items !</h3>
+                            </div>
+                          <% end %>  
+                         
+                        </ul> 
+                    </div>    
+                </div>
+                
+                
+                <hr>
+                
+                <p id="com-title">Comments (<%= @post.comments.count %>)</p>
 
+      <div class="row com"> 
+      <div class"col-md-4">
+        <section id="comments-section">
+            <ol id="comments-view">
+                 <div class="comments" id="comments_<%= @post.id %>">
+                    <% if @post.comments %>
+                      <%= render @post.comments, post: @post %>
+                    <% end %>
+                  </div>
+            </ol>    
+               
+        </section>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-<div class="row">
-	<div class="col-md-6">	
-		
-		<%= image_tag @post.url,  :size => '260x180' %>
-		<p><%= link_to @post.image_name, @post.url %></p>
-	</div>
-		
-</div>
-<div>
-  <%= link_to current_user.user_name , profile_path(current_user) %>
-</div>
-<div>
-  <%= div_for @post do %>
-     <%= render partial: "button", locals: { post: @post } %>
-  <% end %>
-</div> 
-
-<div>
-  <!--add recommendation-->
-</div>  
-  
-  
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-
-
-
-<div class="comments" id="comments_<%= @post.id %>">
-          <% if @post.comments %>
-            <%= render @post.comments, post: @post %>
+       
+          <%= form_for [@post, @post.comments.new] , :html => {:class => "form-horizontal"}  do |f| %>
+        
+          
+                  <div class="form-group">
+                    
+                    <%= f.text_area :content, class:'form-control', placeholder: 'Add a comment...' %>
+                    
+                  </div>
+              
+          
+                  <div class="form-group ">
+                    <%= f.button :submit, class:'btn btn-default com-button' %>
+                  </div>
+        
+            
           <% end %>
+        </div>
+        </div>
+                
+    
+               
+
+        </div>
+        
+
+          
+
 </div>
-
-
-<div class="comment-form col-sm-11">
-        <%= form_for [@post, @post.comments.build] , remote: true do |f| %>
-          <%= f.text_field :content, placeholder: 'Add a comment...', class: "comment_content", id: "comment_content_#{@post.id}" %>
-        <% end %>
-</div>
-

@@ -1,0 +1,24 @@
+<nav class="navbar show-nav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to "Picshare" , root_path , class: "navbar-brand show-nav-brand" %>
+    </div>
+    <ul class="nav navbar-nav ">
+      <li><%= link_to "Share a Pic" , new_post_path %></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+         
+            <li><%= link_to profile_path(current_user) do  %>
+                <i class="glyphicon glyphicon-user"></i> Profile
+                <% end %>
+            </li>
+            <li><%= link_to destroy_user_session_path , method: :delete , data: {confirm: "Wanna Log out ?"} do  %>
+                <i class="glyphicon glyphicon-log-out"></i> Sign Out
+                <% end %>
+            </li>
+      <% end %>    
+    </ul>
+  </div>
+</nav>

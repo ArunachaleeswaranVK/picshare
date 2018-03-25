@@ -1,6 +1,11 @@
 module ApplicationHelper
     
     def post_user(p)
-        User.find_by(id: p.user_id).user_name
+       @user =  User.find_by(id: p.user_id)
+       unless @user.nil? 
+            return @user 
+        else
+            return "Anonymous"
+       end            
     end
 end
