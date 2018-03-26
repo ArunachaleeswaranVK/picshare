@@ -19,6 +19,21 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.alert_wrapper{
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background: #1d6fda;
+    padding: 2.5rem 0;
+    text-align: center;
+    margin: 0;
+    margin-top: 2em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
 body{
   font-family: "Lato";
 }

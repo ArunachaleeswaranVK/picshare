@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
     
-    validates :title, presence: true, length: { minimum: 3, maximum: 12 }
+    validates :title, presence: true
     
     has_many :likes , dependent: :destroy
     

@@ -16,19 +16,19 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
-       
+             <li><%= link_to "Share a pic" , new_post_path %> </li>
 
 
-       
-            <li><%= link_to edit_user_registration_path do  %>
-                <i class="glyphicon glyphicon-user"></i> Account Settings
+           <% if user_signed_in? %>
+            <li><%= link_to profile_path(current_user) do  %>
+                <i class="glyphicon glyphicon-user"></i> <%= current_user.user_name %>
                 <% end %>
             </li>
             <li><%= link_to destroy_user_session_path , method: :delete , data: {confirm: "Wanna Log out ?"} do  %>
                 <i class="glyphicon glyphicon-log-out"></i> Sign Out
                 <% end %>
             </li>
-            
+            <% end %>
        
     
       </ul>

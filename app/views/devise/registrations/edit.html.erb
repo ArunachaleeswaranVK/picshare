@@ -15,7 +15,7 @@
   
   <div class="form-group">
     <%= f.label :bio , class: "user"  %><br />
-    <%= f.text_area :bio, class: "form-control" %>
+    <%= f.text_area :bio, maxlength: 230 ,class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -42,7 +42,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit "Sign up" , class: "btn btn-success btn-block" %>
+    <%= f.submit "Update" , class: "btn btn-success btn-block" %>
   </div>
 <% end %>
 

@@ -58,7 +58,7 @@
                                               <i class="glyphicon glyphicon-pencil"><strong>Edit</strong></i>
                                           <% end %> |
                                       
-                                          <%= link_to post_path(@post), method: :delete , data: {confirm: "Are you sure , Cherry ?"} do %>
+                                          <%= link_to post_path(@post), method: :delete , data: {confirm: "Are you sure ?"} do %>
                                               <i class="glyphicon glyphicon-trash"><strong>Delete</strong></i>
                                           <% end %> 
                                      
@@ -69,7 +69,8 @@
                                 <% if @post.similar_items.first %>
                                 <div id="slide-content-1">
                                    <div class="post-show-card">
-                                    <%= @post.similar_items.first.title %> by <%= link_to post_user(@post.similar_items.first).user_name , profile_path(post_user(@post.similar_items.first)) %>
+                                    <%= link_to @post.similar_items.first.title , post_path(@post.similar_items.first) %>
+                                    by <%= link_to post_user(@post.similar_items.first).user_name , profile_path(post_user(@post.similar_items.first)) %>
                                    </div>
                                   
                                 </div>
@@ -77,14 +78,16 @@
                                 <% if @post.similar_items.second %>
                                 <div id="slide-content-2">
                                     <div class="post-show-card">
-                                    <%= @post.similar_items.second.title %> by <%= link_to post_user(@post.similar_items.second).user_name , profile_path(post_user(@post.similar_items.second)) %>
+                                     <%= link_to @post.similar_items.second.title , post_path(@post.similar_items.second) %>
+                                    by <%= link_to post_user(@post.similar_items.second).user_name , profile_path(post_user(@post.similar_items.second)) %>
                                    </div>
                                 </div>
                                 <% end %>
                                 <% if @post.similar_items.third %>
                                 <div id="slide-content-3">
                                     <div class="post-show-card">
-                                    <%= @post.similar_items.third.title %> by <%= link_to post_user(@post.similar_items.third).user_name , profile_path(post_user(@post.similar_items.third)) %>
+                                    <%= link_to @post.similar_items.third.title , post_path(@post.similar_items.third) %>
+                                    by <%= link_to post_user(@post.similar_items.third).user_name , profile_path(post_user(@post.similar_items.third)) %>
                                    </div>
                                 </div>
                                 <% end %>
@@ -102,7 +105,7 @@
                      <div class="col-md-12">
                         <ul class="hide-bullets">
                         <% if @post.similar_items.present? %>
-                         <p class="rec-title">People also like - </p>
+                         <p class="rec-title">Similar to <%= @post.title %> - </p>
                             <li class="col-sm-2 first-bullet">
                                 <a class="thumbnail" id="carousel-selector-0"><img src="<%= @post.url %>" class="img-responsive"></a>
                             </li>
@@ -138,7 +141,7 @@
                 <p id="com-title">Comments (<%= @post.comments.count %>)</p>
 
       <div class="row com"> 
-      <div class"col-md-4">
+      <div class"col-md-4 col-sm-12 col-xs-12">
         <section id="comments-section">
             <ol id="comments-view">
                  <div class="comments" id="comments_<%= @post.id %>">
@@ -156,7 +159,7 @@
           
                   <div class="form-group">
                     
-                    <%= f.text_area :content, class:'form-control', placeholder: 'Add a comment...' %>
+                    <%= f.text_area :content, class:'form-control', maxlength: "550" ,placeholder: 'Add a comment...' %>
                     
                   </div>
               

@@ -14,3 +14,14 @@ $(document).ready ->
   $(document).on('page:load', ready)
 
 
+$ ->  
+  $(document).ready ->
+  setTimeout (->
+    $('.alert_wrapper').fadeOut 'slow', ->
+      $(this).remove()
+      return
+    return
+  ), 4000
+  return 
+  $(document).ready(ready)
+  $(document).on('page:load', ready)

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   validates :user_name, presence: true, length: { minimum: 3, maximum: 16 } 
+  validates :bio, presence: true, length: { minimum: 3, maximum: 230 } 
   
   has_many :likes, dependent: :destroy
   has_many :posts, through: :likes
